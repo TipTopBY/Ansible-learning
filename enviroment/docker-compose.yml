@@ -1,0 +1,14 @@
+version: "3.8"
+services:
+  test_node1:
+    container_name: "Test_node1"
+    image: "ubuntu:latest"
+    ports:
+      - "22:22"
+    restart: always
+  test_node2:
+    container_name: "Test_node2"
+    image: "ubuntu:latest"
+#    ports:
+#      - "922:22"
+    restart: always
