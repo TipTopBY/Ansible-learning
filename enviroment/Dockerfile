@@ -15,3 +15,4 @@ ADD ./id_rsa.pub /home/ansible/.ssh/authorized_keys
 EXPOSE 22
 
 ENTRYPOINT service ssh start && bash
+CMD tail -f /dev/null

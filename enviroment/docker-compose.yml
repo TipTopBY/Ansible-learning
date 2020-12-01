@@ -1,14 +1,11 @@
 version: "3.8"
 services:
-  test_node1:
-    container_name: "Test_node1"
-    image: "ubuntu:latest"
+  node_01:
+    container_name: "Node_01"
+    build: .
     ports:
-      - "22:22"
-    restart: always
-  test_node2:
-    container_name: "Test_node2"
-    image: "ubuntu:latest"
-#    ports:
-#      - "922:22"
-    restart: always
+      - "822:22"
+    #restart: always
+    volumes:
+      - ./ssh_pub_key/pub_key:/home/ansible/.ssh/pub_key
+    command: tail -f /dev/null
