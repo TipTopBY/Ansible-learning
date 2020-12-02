@@ -2,9 +2,22 @@ version: "3.8"
 services:
   node_01:
     container_name: "Node_01"
-    build: .
+    build: ./Node
     ports:
       - "822:22"
+    volumes:
+      - ./ssh_pub_key/:/home/ansible/ssh_pub_key/
+    command: bash -c "
+         cp /home/ansible/ssh_pub_key/authorized_keys /home/ansible/.ssh/authorized_keys
+         && service ssh start
+         && bash"
+    tty: true
+
+  node_02:
+    container_name: "Node_02"
+    build: ./Node
+    ports:
+      - "922:22"
     volumes:
       - ./ssh_pub_key/:/home/ansible/ssh_pub_key/
     command: bash -c "
