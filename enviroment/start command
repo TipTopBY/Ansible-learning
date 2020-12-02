@@ -1,2 +1,0 @@
-docker run -it --rm --name test -v D:/Ansible-learning/enviroment/ssh_pub_key/:/home/ansible/ssh_pub_key:ro -p 822:22
- mytestimage

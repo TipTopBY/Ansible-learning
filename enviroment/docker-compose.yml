@@ -1,10 +1,28 @@
 version: "3.8"
 services:
+  master_node_01:
+    container_name: "Master_Node_01"
+    build: ./Master_Node
+    ports:
+      - "822:22"
+    volumes:
+      - ./ssh_pub_key/:/home/ansible/ssh_pub_key/
+      - ../ansible.cfg:/home/ansible/ansible.cfg
+      - ../hosts:/home/ansible/hosts
+    command: bash -c "
+         cp /home/ansible/.ssh/id_rsa.pub /home/ansible/ssh_pub_key/authorized_keys
+         && service ssh start
+         && bash"
+    tty: true
+
+
   node_01:
     container_name: "Node_01"
     build: ./Node
     ports:
-      - "822:22"
+      - "722:22"
+    depends_on:
+      - master_node_01
     volumes:
       - ./ssh_pub_key/:/home/ansible/ssh_pub_key/
     command: bash -c "
@@ -18,6 +36,8 @@ services:
     build: ./Node
     ports:
       - "922:22"
+    depends_on:
+      - master_node_01
     volumes:
       - ./ssh_pub_key/:/home/ansible/ssh_pub_key/
     command: bash -c "
