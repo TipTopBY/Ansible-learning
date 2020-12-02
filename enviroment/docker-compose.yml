@@ -5,7 +5,10 @@ services:
     build: .
     ports:
       - "822:22"
-    #restart: always
     volumes:
-      - ./ssh_pub_key/pub_key:/home/ansible/.ssh/pub_key
-    command: tail -f /dev/null
+      - ./ssh_pub_key/:/home/ansible/ssh_pub_key/
+    command: bash -c "
+         cp /home/ansible/ssh_pub_key/authorized_keys /home/ansible/.ssh/authorized_keys
+         && service ssh start
+         && bash"
+    tty: true
