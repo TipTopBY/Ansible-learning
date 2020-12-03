@@ -1,4 +1,6 @@
-latest
-service_healthyedfgh
+[Nodes]
+Node_01
+Node_02
 
-rdtgh
+[Nodes:vars]
+ansible_user = ansible
