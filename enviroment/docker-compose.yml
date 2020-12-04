@@ -5,6 +5,11 @@ services:
     build:
       context: ./Master_Node
     image: master_node:latest
+    deploy:
+      resources:
+        limits:
+          cpus: '0.50'
+          memory: 50M
     hostname: master_node_01
     ports:
       - "822:22"
@@ -24,6 +29,11 @@ services:
     container_name: "Node_01"
     build: ./Node
     image: node:latest
+    deploy:
+      resources:
+        limits:
+          cpus: '0.50'
+          memory: 50M
     hostname: node_01
     depends_on:
       - master_node_01
@@ -38,6 +48,11 @@ services:
   node_02:
     container_name: "Node_02"
     image: node:latest
+    deploy:
+      resources:
+        limits:
+          cpus: '0.50'
+          memory: 50M
     hostname: node_02
     depends_on:
       - node_01
