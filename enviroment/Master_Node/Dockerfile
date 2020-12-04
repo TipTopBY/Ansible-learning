@@ -13,7 +13,6 @@ RUN mkdir /home/ansible/.ssh
 RUN ssh-keygen -q -N "" -f /home/ansible/.ssh/id_rsa
 RUN chown -hR ansible /home/ansible/.ssh
 
-
 EXPOSE 22
 
 #ENTRYPOINT service ssh start && bash

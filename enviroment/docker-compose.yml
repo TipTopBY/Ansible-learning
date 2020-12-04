@@ -9,10 +9,11 @@ services:
     volumes:
       - ./ssh_pub_key/:/home/ansible/ssh_pub_key/
       - ../ansible/:/home/ansible/ansible/
+    environment:
+      - ANSIBLE_CONFIG
     command: bash -c "
          cp /home/ansible/.ssh/id_rsa.pub /home/ansible/ssh_pub_key/authorized_keys
          && service ssh start
-         && export ANSIBLE_CONFIG=./ansible.cfg
          && bash"
     tty: true
 
