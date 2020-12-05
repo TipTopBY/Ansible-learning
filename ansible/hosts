@@ -2,5 +2,6 @@
 Node_01
 Node_02
 
+
 [Nodes:vars]
 ansible_user = ansible
