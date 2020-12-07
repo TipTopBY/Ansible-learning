@@ -1,0 +1,3 @@
+---
+# defaults file for apache_site
+destenation_file: /var/www/html

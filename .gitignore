@@ -1,1 +1,2 @@
 /ansible/Playbooks/test_site
+/ansible/roles/apache_site/files

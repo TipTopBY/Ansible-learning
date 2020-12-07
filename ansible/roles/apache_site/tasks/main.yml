@@ -1,0 +1,26 @@
+---
+# tasks file for apache_site
+- block:
+    - name: Install Apache Web server to node_01
+      apt: name=apache2 update_cache=yes
+    - name: start and Enable service apache2 on node_01
+      service: name=apache2 state=started enabled=yes
+  when: ansible_hostname == "node_01"
+- block:
+    - name: Install Apache Web server to node_02
+      apt: name=apache2 update_cache=yes
+    - name: start and Enable service apache2 on node_02
+      service: name=apache2 state=started enabled=yes
+  when: ansible_hostname == "node_02"
+- name: Remove false directory
+  file: path=/var/www/html/test_site state=absent
+- name: Copy files
+  copy: src=. dest={{ destenation_file }}
+  notify:
+    - Restart apache2 from node_01
+    - Restart apache2 from node_02
+- name: Generate page
+  template: src=./index.j2 dest={{ destenation_file }}/index.html
+  notify:
+    - Restart apache2 from node_01
+    - Restart apache2 from node_02
