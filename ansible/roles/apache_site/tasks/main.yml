@@ -12,15 +12,12 @@
     - name: start and Enable service apache2 on node_02
       service: name=apache2 state=started enabled=yes
   when: ansible_hostname == "node_02"
-- name: Remove false directory
-  file: path=/var/www/html/test_site state=absent
-- name: Copy files
-  copy: src=. dest={{ destenation_file }}
-  notify:
-    - Restart apache2 from node_01
-    - Restart apache2 from node_02
-- name: Generate page
-  template: src=./index.j2 dest={{ destenation_file }}/index.html
-  notify:
-    - Restart apache2 from node_01
-    - Restart apache2 from node_02
+
+- include: remove_dir.yml
+- include: copy_fails.yml
+- include: generate_index_file.yml
+- include: Restart_nodes.yml
+
+- name: Delegate this task to any host
+  shell: echo This host have name {{ inventory_hostname}} and node name {{ ansible_nodename}} >> /home/ansible/ansible/delegate.log
+  delegate_to: 127.0.0.1

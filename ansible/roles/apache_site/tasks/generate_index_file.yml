@@ -1,0 +1,6 @@
+---
+- name: Generate page
+  template: src=./index.j2 dest={{ destenation_file }}/index.html
+  notify:
+    - Restart apache2 from node_01
+    - Restart apache2 from node_02
